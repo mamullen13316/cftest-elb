@@ -5,12 +5,12 @@ Parameters:
   PublicLBSubnet1:
     Description: ID of the Subnet for the public load balancer
     Type: List<AWS::EC2::Subnet::Id>
-  PublicLBSubnet2:
-    Description: ID of the Subnet for the public load balancer
-    Type: List<AWS::EC2::Subnet::Id>
-  PublicLBSubnet3:
-    Description: ID of the Subnet for the public load balancer
-    Type: List<AWS::EC2::Subnet::Id>    
+  # PublicLBSubnet2:
+  #   Description: ID of the Subnet for the public load balancer
+  #   Type: List<AWS::EC2::Subnet::Id>
+  # PublicLBSubnet3:
+  #   Description: ID of the Subnet for the public load balancer
+  #   Type: List<AWS::EC2::Subnet::Id>    
   LoadBalancerTerminationProtection:
     Description: Instance Termination Protection.
     Type: String
@@ -27,26 +27,26 @@ Parameters:
   TargetInstance2:
       Description: Target instance ID
       Type: String<AWS::EC2::Id>
-  TargetInstance3:
-      Description: Target instance ID
-      Type: String<AWS::EC2::Id>
+  # TargetInstance3:
+  #     Description: Target instance ID
+  #     Type: String<AWS::EC2::Id>
 
 Resources:
  EIP1:
   Type: AWS::EC2::EIP
   Properties:
     Domain: VPC
- EIP2:
-  Type: AWS::EC2::EIP
-  Properties:
-    Domain: VPC
- EIP3:
-  Type: AWS::EC2::EIP
-  Properties:
-    Domain: VPC
+#  EIP2:
+#   Type: AWS::EC2::EIP
+#   Properties:
+#     Domain: VPC
+#  EIP3:
+#   Type: AWS::EC2::EIP
+#   Properties:
+#     Domain: VPC
  TestELB1:
   DependsOn:
-   - EIP3
+  #  - EIP3
    - EIP2
    - EIP1
   Type: 'AWS::ElasticLoadBalancingV2::LoadBalancer'
@@ -68,22 +68,22 @@ Resources:
            Fn::Select:
            - '0'
            - Ref: PublicLBSubnet1
-       - AllocationId:
-          Fn::GetAtt:
-          - EIP2
-          - AllocationId
-         SubnetId:
-           Fn::Select:
-           - '0'
-           - Ref: PublicLBSubnet2
-       - AllocationId:
-          Fn::GetAtt:
-          - EIP3
-          - AllocationId
-         SubnetId:
-           Fn::Select:
-           - '0'
-           - Ref: PublicLBSubnet3
+      #  - AllocationId:
+      #     Fn::GetAtt:
+      #     - EIP2
+      #     - AllocationId
+      #    SubnetId:
+      #      Fn::Select:
+      #      - '0'
+      #      - Ref: PublicLBSubnet2
+      #  - AllocationId:
+      #     Fn::GetAtt:
+      #     - EIP3
+      #     - AllocationId
+      #    SubnetId:
+      #      Fn::Select:
+      #      - '0'
+      #      - Ref: PublicLBSubnet3
      Tags:
      - Key: "Name"
        Value: "TestELB1"
@@ -105,9 +105,9 @@ Resources:
     - Id: 
        !Ref TargetInstance2
       Port: 80
-    - Id: 
-       !Ref TargetInstance3
-      Port: 80
+    # - Id: 
+    #    !Ref TargetInstance3
+    #   Port: 80
    Tags:
     - Key: "Name"
       Value: "TestELBHTTPTargetGroup"
