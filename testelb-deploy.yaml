@@ -1,0 +1,7 @@
+template-file-path: ./testelb-template.yaml
+parameters: 
+    VpcId: vpc-0593e0d3b65580184
+    PublicLBSubnet1: subnet-09b7675db77173c08
+    TargetInstance1: i-06020e5c8a4de3ee8
+    TargetInstance2: i-0b9db5ed8e67159c4
+
