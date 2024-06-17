@@ -47,7 +47,7 @@ Resources:
  TestELB1:
   DependsOn:
   #  - EIP3
-   - EIP2
+  #  - EIP2
    - EIP1
   Type: 'AWS::ElasticLoadBalancingV2::LoadBalancer'
   Properties:
